@@ -1,6 +1,8 @@
-# Sales Analytics Dashboard
+# Sales Analytics Dashboard - Demo Project
 
 Interactive Streamlit dashboard for monitoring daily sales performance. KPI cards, trend charts, day-of-week breakdown, and monthly revenue comparison.
+
+This is a demo project using synthetic data to demonstrate dashboard development with Streamlit and Plotly.
 
 ## Live Demo
 
