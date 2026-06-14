@@ -1,58 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Sales Dashboard - Demo Project</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sales Dashboard (Streamlit) - Demo Project</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.6}
-.container{max-width:900px;margin:0 auto;padding:40px 20px}
-h1{font-size:2em;margin-bottom:8px;color:#16213e}
-h2{color:#0f3460;margin:24px 0 12px}
-.demo-tag{color:#e94560;font-weight:600;font-size:0.9em}
-.card{background:white;border-radius:12px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin:16px 0}
-.tag{display:inline-block;background:#e9ecef;color:#495057;padding:3px 10px;border-radius:20px;font-size:0.85em;margin:2px 4px 2px 0}
-.btn{display:inline-block;background:#0f3460;color:white;padding:10px 24px;border-radius:6px;text-decoration:none;font-weight:500;margin:8px 4px;cursor:pointer}
-.btn:hover{background:#16213e}
-.btn-live{background:#e94560}.btn-live:hover{background:#d63851}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
-@media(max-width:600px){.grid{grid-template-columns:1fr}}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:#f4f6f9;color:#1a1a2e;line-height:1.6}
+.nav{background:#16213e;color:white;padding:12px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.nav a{color:#8ab4f8;text-decoration:none;font-size:0.9em;margin-left:16px;transition:color .2s}
+.nav a:hover{color:white}
+.nav .site-title{font-weight:600;font-size:1em;color:white}
+.hero{background:linear-gradient(135deg,#16213e,#0f3460);color:white;padding:48px 24px;text-align:center}
+.hero h1{font-size:2.2em;font-weight:700;margin-bottom:8px}
+.hero p{color:#a8c8f8;font-size:1.05em;max-width:700px;margin:0 auto;line-height:1.5}
+.hero .badge{display:inline-block;background:#e94560;padding:3px 14px;border-radius:20px;font-size:0.75em;font-weight:600;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
+.container{max-width:960px;margin:0 auto;padding:32px 20px}
+.card{background:white;border-radius:12px;padding:28px;margin:20px 0;box-shadow:0 1px 4px rgba(0,0,0,0.06);transition:box-shadow .2s}
+.card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.1)}
+.card h2{font-size:1.2em;color:#16213e;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #eef0f4}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media(max-width:640px){.grid-3{grid-template-columns:1fr}}
+.kpi{text-align:center;padding:20px 12px;background:#f8f9fa;border-radius:10px;border:1px solid #eef0f4}
+.kpi .num{font-size:2em;font-weight:700;color:#0f3460}
+.kpi .label{font-size:0.82em;color:#6c757d;margin-top:4px}
+.tag{display:inline-block;background:#e9ecef;color:#495057;padding:4px 12px;border-radius:20px;font-size:0.82em;margin:3px 5px 3px 0}
+.btn-group{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;background:#0f3460;color:white;padding:10px 22px;border-radius:8px;text-decoration:none;font-weight:500;font-size:0.9em;transition:all .2s}
+.btn:hover{background:#16213e;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:#0f3460;border:2px solid #0f3460}
+.btn-outline:hover{background:#0f3460;color:white}
+.btn-green{background:#2ecc71}
+.btn-green:hover{background:#27ae60}
+.btn-dashboard{background:#e94560;font-size:1.1em;padding:14px 32px}
+.btn-dashboard:hover{background:#d63851}
+.dashboard-box{background:linear-gradient(135deg,#16213e,#0f3460);border-radius:16px;padding:48px 32px;text-align:center;color:white;margin:24px 0}
+.dashboard-box h3{font-size:1.6em;margin-bottom:8px;color:white}
+.dashboard-box p{color:#a8c8f8;margin-bottom:20px}
+.features{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+@media(max-width:480px){.features{grid-template-columns:1fr}}
 .feature{padding:12px;background:#f8f9fa;border-radius:8px;text-align:center}
-.feature .icon{font-size:2em;margin-bottom:4px}
+.feature .emoji{font-size:1.5em;margin-bottom:4px}
+.feature .name{font-weight:600;font-size:0.9em}
+.feature .desc{font-size:0.8em;color:#6c757d;margin-top:2px}
+.list-items{list-style:none;padding:0}
+.list-items li{padding:8px 0;border-bottom:1px solid #f0f0f0;display:flex;gap:8px}
+.list-items li:last-child{border-bottom:none}
+.list-items li::before{content:"\2714";color:#2ecc71;font-weight:700}
+@media(max-width:480px){.hero h1{font-size:1.6em}.container{padding:16px 12px}.card{padding:16px}}
 </style>
 </head>
 <body>
-<div class="container">
-<h1>Sales Analytics Dashboard</h1>
-<p class="demo-tag">Demo Project</p>
-<p>Interactive Streamlit dashboard for monitoring daily sales with KPI cards, trend charts, and data export.</p>
+<nav class="nav">
+<div class="site-title">Sales Dashboard</div>
+<div>
+<a href="https://harshvardhankulkarni.github.io/data-analytics-portfolio/">Portfolio</a>
+<a href="https://github.com/harshvardhankulkarni/sales-dashboard">GitHub</a>
+</div>
+</nav>
 
-<a class="btn btn-live" href="https://harsh-data-analytics-portfolio.streamlit.app" target="_blank">Launch Live Dashboard</a>
+<section class="hero">
+<div class="badge">Demo Project</div>
+<h1>Sales Dashboard</h1>
+<p>Interactive Streamlit dashboard for sales analytics with KPI cards, Plotly charts, and day-of-week analysis. Deployed live on Streamlit Cloud.</p>
+</section>
+
+<div class="container">
+
+<div class="dashboard-box">
+<h3>Live Dashboard</h3>
+<p>Fully interactive sales analytics dashboard. Explore trends, filter by month, and drill into daily performance.</p>
+<a class="btn btn-dashboard" href="https://harsh-data-analytics-portfolio.streamlit.app" target="_blank">Launch Dashboard</a>
+</div>
 
 <div class="card">
-<h2>Features</h2>
-<div class="grid">
-<div class="feature"><div class="icon">4</div><strong>KPI Cards</strong><br>Total revenue, daily avg, peak day, last 7 days</div>
-<div class="feature"><div class="icon">Line</div><strong>Trend Chart</strong><br>Interactive Plotly with 7-day and 30-day averages</div>
-<div class="feature"><div class="icon">Bar</div><strong>Day Analysis</strong><br>Average sales by day of week</div>
-<div class="feature"><div class="icon">CSV</div><strong>Data Export</strong><br>Download raw data as CSV</div>
+<h2>Key Metrics</h2>
+<div class="grid-3">
+<div class="kpi"><div class="num">Rs.12.1M</div><div class="label">Total Revenue</div></div>
+<div class="kpi"><div class="num">Rs.67.4K</div><div class="label">Avg Daily Revenue</div></div>
+<div class="kpi"><div class="num">180 Days</div><div class="label">Period Analyzed</div></div>
 </div>
+</div>
+
+<div class="card">
+<h2>Dashboard Features</h2>
+<div class="features">
+<div class="feature"><div class="name">KPI Cards</div><div class="desc">Total revenue, avg daily, peak performance</div></div>
+<div class="feature"><div class="name">Daily Trend Chart</div><div class="desc">Interactive Plotly time series with zoom</div></div>
+<div class="feature"><div class="name">Day-of-Week Analysis</div><div class="desc">Bar chart showing performance by day</div></div>
+<div class="feature"><div class="name">Monthly Breakdown</div><div class="desc">Month selector to view specific periods</div></div>
+</div>
+</div>
+
+<div class="card">
+<h2>Notebook</h2>
+<p style="margin-bottom:12px;color:#495057">Explore the dashboard logic and data generation in Jupyter Notebook.</p>
+<a class="btn btn-green" href="sales_dashboard.ipynb">Download .ipynb Notebook</a>
 </div>
 
 <div class="card">
 <h2>Tech Stack</h2>
-<span class="tag">Streamlit</span><span class="tag">Plotly</span><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Python</span>
+<span class="tag">Python</span>
+<span class="tag">Streamlit</span>
+<span class="tag">Plotly</span>
+<span class="tag">Pandas</span>
+<span class="tag">NumPy</span>
+<span class="tag">Streamlit Cloud</span>
 </div>
 
-<div class="card">
-<h2>Run Locally</h2>
-<pre style="background:#1a1a2e;color:#f8f9fa;padding:16px;border-radius:8px;overflow-x:auto">
-pip install -r requirements.txt
-streamlit run dashboard.py</pre>
+<div class="btn-group">
+<a class="btn" href="https://github.com/harshvardhankulkarni/sales-dashboard">View Repository</a>
+<a class="btn btn-outline" href="dashboard.py">Download Script</a>
+<a class="btn btn-outline" href="docs/architecture.md">Architecture</a>
+<a class="btn btn-outline" href="docs/runbook.md">Runbook</a>
+<a class="btn btn-dashboard" href="https://harsh-data-analytics-portfolio.streamlit.app" target="_blank">Launch Dashboard</a>
 </div>
 
-<a class="btn" href="https://github.com/harshvardhankulkarni/sales-dashboard" target="_blank">View Source</a>
-<a class="btn" href="dashboard.py" target="_blank">Download Script</a>
-<a class="btn" href="docs/architecture.md" target="_blank">Architecture</a>
-<a class="btn" href="docs/runbook.md" target="_blank">Runbook</a>
 </div>
+
+<footer style="text-align:center;padding:24px;color:#6c757d;font-size:0.85em;border-top:1px solid #dee2e6;margin-top:24px">
+<p><a href="https://harshvardhankulkarni.github.io/data-analytics-portfolio/" style="color:#0f3460">Back to Portfolio</a> &middot; Harshvardhan Kulkarni</p>
+</footer>
 </body>
 </html>
