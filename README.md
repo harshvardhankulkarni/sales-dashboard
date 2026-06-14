@@ -1,116 +1,84 @@
-# Sales Analytics Dashboard - Demo Project
+<!-- GSD -->
 
-Interactive Streamlit dashboard for monitoring daily sales performance. KPI cards, trend charts, day-of-week breakdown, and monthly revenue comparison.
+# Sales Analytics Dashboard
 
-**Live Demo:** https://harsh-data-analytics-portfolio.streamlit.app
+Interactive Streamlit dashboard for daily sales monitoring. Displays KPI cards, interactive Plotly charts (sales trend with rolling averages, day-of-week breakdown, monthly comparison), and raw data export with CSV download. Uses synthetic data generated on load.
+
+**Live demo:** https://harsh-data-analytics-portfolio.streamlit.app
+
+---
+
+## Features
+
+- **KPI cards** — Total revenue, daily average, peak day (with date), last 7 days average
+- **Sales trend chart** — Interactive line chart with 7-day and 30-day rolling average overlays
+- **Sales by day of week** — Bar chart sorted Monday–Sunday, highlighting weekend performance
+- **Monthly revenue** — Bar chart comparing total sales per month
+- **Raw data expander** — View first 50 rows, download full dataset as CSV
+
+---
 
 ## Tech Stack
 
-- Python 3.8+
-- Streamlit 1.28+ - Web application framework
-- Pandas 2.0+ - Data manipulation
-- NumPy 1.24+ - Data generation
-- Plotly 5.10+ - Interactive charts
+| Layer | Technology |
+|-------|-----------|
+| App framework | Streamlit 1.31.0 |
+| Data manipulation | Pandas 2.2.0 |
+| Numeric computation | NumPy 1.26.3 |
+| Interactive charts | Plotly 5.18.0 |
+| Static charts (dev) | Matplotlib 3.8.3, Seaborn 0.13.2 |
+| Deployment | Streamlit Cloud |
+| Version control | GitHub |
+
+---
 
 ## Quick Start
-
-### Prerequisites
-
-- Python 3.8 or higher
-- pip package manager
-
-### Installation
 
 ```bash
 git clone https://github.com/harshvardhankulkarni/sales-dashboard.git
 cd sales-dashboard
+python -m venv .venv
+.venv\Scripts\activate    # Windows
+# source .venv/bin/activate  # macOS/Linux
 pip install -r requirements.txt
-```
-
-### Running Locally
-
-```bash
 streamlit run dashboard.py
 ```
 
 Your browser opens at `http://localhost:8501`.
 
-### Deploy on Streamlit Cloud
+---
 
-1. Push this repo to GitHub.
-2. Go to https://share.streamlit.io.
-3. Sign in with GitHub.
-4. Click "New app".
-5. Select this repository, branch `main`, file `dashboard.py`.
-6. Click "Deploy".
+## Live Demo
 
-Your app is live at `https://[username]-[repo]-dashboard.streamlit.app`.
+- **Streamlit Cloud:** https://harsh-data-analytics-portfolio.streamlit.app
+- **GitHub Pages:** https://harshvardhankulkarni.github.io/sales-dashboard/
 
-## Features
-
-### KPI Cards
-- Total revenue over 180 days.
-- Average daily revenue.
-- Peak day value with date.
-- Last 7 days average.
-
-### Sales Trend Chart
-- Interactive Plotly line chart.
-- 7-day rolling average overlay.
-- 30-day rolling average overlay.
-- Zoom, pan, and hover for details.
-
-### Day of Week Analysis
-- Bar chart of average sales by day.
-- Sorted Monday through Sunday.
-- Highlights best and worst days.
-
-### Monthly Revenue
-- Bar chart comparing all months.
-- Shows growth and decline patterns.
-
-### Raw Data Export
-- Expandable data table.
-- CSV download button.
+---
 
 ## Project Structure
 
 ```
 sales-dashboard/
-  dashboard.py          Streamlit application
-  requirements.txt      Python dependencies
+  dashboard.py          Streamlit application (single-file app)
+  sales_dashboard.ipynb Jupyter notebook version
+  index.html            GitHub Pages landing page
+  requirements.txt      Pinned Python dependencies
   README.md             This file
   docs/
-    architecture.md     Design and methodology
-    runbook.md          Operations guide
+    ARCHITECTURE.md     Architecture and design decisions
+    GETTING-STARTED.md  Setup and first run guide
+    DEVELOPMENT.md      Development guide and contribution
+    TESTING.md          Testing and validation
+    CONFIGURATION.md    Configuration reference
 ```
 
-## Configuration
+---
 
-### Data Source
+## Demo Note
 
-The dashboard currently generates synthetic data. To use real data, replace the generation block (lines 14-26) with:
+This is a portfolio / demo project. All data is synthetic — generated at runtime via NumPy with a reproducible seed (`np.random.seed(42)`). Not intended for production use.
 
-```python
-import pandas as pd
-df = pd.read_csv('your_sales_data.csv')
-```
-
-Required columns: `date`, `sales`.
-
-### Visual Settings
-
-- Page title: Change `st.set_page_config(page_title=...)`.
-- Color scheme: Edit Plotly template or Streamlit theme in `.streamlit/config.toml`.
-
-## Requirements
-
-```
-pandas>=2.0.0
-numpy>=1.24.0
-plotly>=5.10.0
-streamlit>=1.28.0
-```
+---
 
 ## License
 
