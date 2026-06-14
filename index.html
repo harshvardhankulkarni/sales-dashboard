@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Sales Dashboard - Demo Project</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.6}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+h1{font-size:2em;margin-bottom:8px;color:#16213e}
+h2{color:#0f3460;margin:24px 0 12px}
+.demo-tag{color:#e94560;font-weight:600;font-size:0.9em}
+.card{background:white;border-radius:12px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin:16px 0}
+.tag{display:inline-block;background:#e9ecef;color:#495057;padding:3px 10px;border-radius:20px;font-size:0.85em;margin:2px 4px 2px 0}
+.btn{display:inline-block;background:#0f3460;color:white;padding:10px 24px;border-radius:6px;text-decoration:none;font-weight:500;margin:8px 4px;cursor:pointer}
+.btn:hover{background:#16213e}
+.btn-live{background:#e94560}.btn-live:hover{background:#d63851}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.feature{padding:12px;background:#f8f9fa;border-radius:8px;text-align:center}
+.feature .icon{font-size:2em;margin-bottom:4px}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Sales Analytics Dashboard</h1>
+<p class="demo-tag">Demo Project</p>
+<p>Interactive Streamlit dashboard for monitoring daily sales with KPI cards, trend charts, and data export.</p>
+
+<a class="btn btn-live" href="https://harsh-data-analytics-portfolio.streamlit.app" target="_blank">Launch Live Dashboard</a>
+
+<div class="card">
+<h2>Features</h2>
+<div class="grid">
+<div class="feature"><div class="icon">4</div><strong>KPI Cards</strong><br>Total revenue, daily avg, peak day, last 7 days</div>
+<div class="feature"><div class="icon">Line</div><strong>Trend Chart</strong><br>Interactive Plotly with 7-day and 30-day averages</div>
+<div class="feature"><div class="icon">Bar</div><strong>Day Analysis</strong><br>Average sales by day of week</div>
+<div class="feature"><div class="icon">CSV</div><strong>Data Export</strong><br>Download raw data as CSV</div>
+</div>
+</div>
+
+<div class="card">
+<h2>Tech Stack</h2>
+<span class="tag">Streamlit</span><span class="tag">Plotly</span><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Python</span>
+</div>
+
+<div class="card">
+<h2>Run Locally</h2>
+<pre style="background:#1a1a2e;color:#f8f9fa;padding:16px;border-radius:8px;overflow-x:auto">
+pip install -r requirements.txt
+streamlit run dashboard.py</pre>
+</div>
+
+<a class="btn" href="https://github.com/harshvardhankulkarni/sales-dashboard" target="_blank">View Source</a>
+<a class="btn" href="dashboard.py" target="_blank">Download Script</a>
+<a class="btn" href="docs/architecture.md" target="_blank">Architecture</a>
+<a class="btn" href="docs/runbook.md" target="_blank">Runbook</a>
+</div>
+</body>
+</html>
